@@ -1,7 +1,7 @@
 $(document).ready(function(event) {
   $("form#form").submit(function(event) {
     event.preventDefault();
-    $("#output").show();
+    $("#output").fadeIn();
     let limit = $("input#submission").val();
     let booleans = [];
     let primeNumbers = [];
@@ -9,9 +9,21 @@ $(document).ready(function(event) {
     for (let i = 1; i < limit; i+=1) {
       booleans.push(true);
     }
-    alert(booleans);
-  
     
-    //$("p").text(result);
+    for (let i = 2; i < limit; i+=1) {
+      if (booleans[i-2]) {
+        for (let j = i*2; j<= limit; j += i) {
+          booleans[j-2] = false;
+        }
+      }
+    }
+  
+    for (let k = 0; k < booleans.length; k+=1) {
+      if (booleans[k]) {
+        primeNumbers.push(k+2)
+      }
+      
+    }
+    $("p").text(primeNumbers);
   });
  }); 
